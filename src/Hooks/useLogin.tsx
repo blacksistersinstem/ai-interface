@@ -32,9 +32,10 @@ export const useLogin = (): [
 
     axios
       .post(`${api_url}/login`, JSON.stringify(credentials), {
+        withCredentials: true,
         headers: {
+          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
-          withCredentials: true,
         },
       })
       .then((data) => {
@@ -42,7 +43,6 @@ export const useLogin = (): [
         setMessage("Login Successful!");
       })
       .catch((error) => {
-        console.log(credentials);
         if (error.request.status === 500) {
           setIsSuccess(false);
           setMessage("Username and/or password incorrect. Please try again.");

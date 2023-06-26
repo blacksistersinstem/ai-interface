@@ -21,7 +21,7 @@ export const LoginBox = () => {
       <button onClick={() => setCredentials({ username, password })}>
         Submit
       </button>
-      <div style={{ color: isSuccess ? "black" : "red" }}>{message}{document.cookie}</div>
+      <div style={{ color: isSuccess ? "black" : "red" }}>{message}</div>
     </>
   );
 };

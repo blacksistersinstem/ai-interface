@@ -7,7 +7,7 @@ export const LoginBox = () => {
 
   const [isSuccess, message, setCredentials] = useLogin();
 
-  return (
+  const loginPrompt = (
     <>
       <div>Login</div>
       <input
@@ -24,4 +24,5 @@ export const LoginBox = () => {
       <div style={{ color: isSuccess ? "black" : "red" }}>{message}</div>
     </>
   );
+  return isSuccess ?? loginPrompt;
 };

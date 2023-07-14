@@ -34,8 +34,7 @@ export const useLogin = (): [
   });
 
   useEffect(() => {
-    if (!credentials.username || !credentials.password) return;
-
+    //if (!credentials.username || !credentials.password) return;
     axios
       .post(`${api_url}/login`, JSON.stringify(credentials), {
         withCredentials: true,

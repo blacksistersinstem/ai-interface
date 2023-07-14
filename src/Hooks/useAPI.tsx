@@ -45,7 +45,7 @@ export const useAPI = (
       .catch((error) => {
         if (error.request.status === 500) {
           setIsSuccess(false);
-          setResponse(error.message);
+          setResponse(error.response.data);
         } else {
           setIsSuccess(false);
           setResponse("Failed to connect to server.");

@@ -5,11 +5,14 @@ import { ResponseBox } from "./Views/ResponseBox/ResponseBox";
 
 const App = () => {
   return (
-    <>
-      <div>hello world</div>
+    <div className="App-container">
+      <div className="nav">
+        <h1>CareerCompass</h1>
+      </div>
       <LoginBox />
       <ResponseBox />
-    </>
+      <footer></footer>
+    </div>
   );
 };
 

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useLogin } from "../../Hooks/useLogin";
+import './LoginBox.css';
+import { PopupModal } from "../PopupModal/PopupModal";
 
 export const LoginBox = () => {
   const [username, setUsername] = useState("");
@@ -9,20 +11,24 @@ export const LoginBox = () => {
 
   const loginPrompt = (
     <>
-      <div>Login</div>
-      <input
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="username"
-      ></input>
-      <input
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="password"
-      ></input>
-      <button onClick={() => setCredentials({ username, password })}>
-        Submit
-      </button>
-      <div style={{ color: isSuccess ? "black" : "red" }}>{message}</div>
+      <div className="login-container">
+        <div className="title">Login</div>
+        <input
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="username"
+        ></input>
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="password"
+        ></input>
+        <button onClick={() => setCredentials({ username, password })}>
+          Submit
+        </button>
+      </div>
     </>
   );
-  return isSuccess ?? loginPrompt;
+
+  console.log(isSuccess)
+
+  return  isSuccess == false ? loginPrompt : <PopupModal message={message}/>;
 };

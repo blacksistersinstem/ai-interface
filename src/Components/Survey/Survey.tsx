@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
-import styles from "./Survey.module.scss";
+import "./Survey.css";
 
 interface SurveryProps {
   children: React.ReactNode[];
@@ -43,18 +43,19 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
   });
 
   return (
-    <div className={styles.container}>
-      <SwiperComponent
-        allowTouchMove={false}
-        modules={[Navigation]}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        }}
-        slidesPerView={"auto"}
-      >
-        {slides}
-      </SwiperComponent>
-    </div>
+    <SwiperComponent
+      allowTouchMove={false}
+      centeredSlides
+      centeredSlidesBounds
+      modules={[Navigation]}
+      navigation={{
+        prevEl: prevRef.current,
+        nextEl: nextRef.current,
+      }}
+      spaceBetween={30}
+      slidesPerView={'auto'}
+    >
+      {slides}
+    </SwiperComponent>
   );
 };

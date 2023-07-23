@@ -9,8 +9,8 @@ $white: white;
   gap: 10px;
   text-align: left;
   justify-content: center;
-  align-items: center;
   height: auto;
+  align-items: center;
 
   h1 {
     font-weight: 700;
@@ -26,6 +26,7 @@ $white: white;
 
   .buttonContainer {
     cursor: pointer;
+    margin-top: 20px;
   }
 
   button {

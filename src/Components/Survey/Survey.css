@@ -1,0 +1,15 @@
+.swiper {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative; 
+}
+
+.swiper-wrapper {
+  
+}
+
+.swiper-slide {
+  height: auto;
+  width: 100%;
+}

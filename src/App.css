@@ -1,5 +1,5 @@
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 .App-container {
@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: green;
   height: 95vh;
 }
 

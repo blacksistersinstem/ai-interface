@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { LoginBox } from "./Views/LoginBox/LoginBox";
 import { ResponseBox } from "./Views/ResponseBox/ResponseBox";
+import { GetStartedPrompt } from "./Views/GetStartedPrompt/GetStartedBox";
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
         <h1>CareerCompass</h1>
       </div>
       <LoginBox />
-      <ResponseBox />
+      <GetStartedPrompt />
+      {/* <ResponseBox /> */}
       <footer></footer>
     </div>
   );

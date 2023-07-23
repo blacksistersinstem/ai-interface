@@ -1,0 +1,44 @@
+@import "../../../module.scss";
+
+$blue: #2f2c99;
+$white: white;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 48px;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 22px;
+  }
+
+  button {
+    // orientation
+    all: unset;
+    display: flex;
+    align-items: center;
+    // size
+    width: 300px;
+    font-size: 22px;
+    padding: 10px 20px 12px 20px;
+    // spacing
+    gap: 15px;
+    // decoration
+    color: $white;
+    background-color: $blue;
+    border-radius: 10px;
+    cursor: pointer;
+
+    .arrow {
+      height: 25px;
+      width: 25px;
+    }
+  }
+}

@@ -1,28 +1,22 @@
 import React, { useState } from "react";
-import { ReactComponent as Arrow } from "../../assets/svg/arrow.svg";
-
 import styles from "./GetStartedBox.module.scss";
+import { Button } from "../../Components/Button/Button";
 
 interface GetStartedPromptProps {
   handleNext?: () => void;
 }
 
 export const GetStartedPrompt: React.FC<GetStartedPromptProps> = ({
-  handleNext,
+  handleNext
 }) => {
   return (
     <>
       <section className={styles.container}>
-        <h1>Find Your Dream Job</h1>
-        <p>{`We'll start by answering a few questions`}</p>
-        <div onClick={handleNext} className={styles.buttonContainer}>
-          <button>
-            <div className={styles.arrow}>
-              <Arrow />
-            </div>
-            {`Let's Get Started`}
-          </button>
-        </div>
+        <div className={styles["question-box"]}>
+          <h1>Find Your Dream Job</h1>
+          <p>{`We'll start by answering a few questions`}</p>
+          <Button text={`Let's get started`} onClick={handleNext} arrow/>
+          </div>
       </section>
     </>
   );

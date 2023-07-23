@@ -1,0 +1,28 @@
+@import "../../../module.scss";
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative; 
+}
+
+.swiper-wrapper {
+}
+
+.swiper-slide {
+}
+
+.swiper-pagination-bullets {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  bottom: -25px;  
+}
+
+.swiper-pagination-bullet {
+  background-color: $blue;
+}
+
+.swiper-pagination-active {
+}

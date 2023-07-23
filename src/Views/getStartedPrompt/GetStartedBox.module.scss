@@ -1,8 +1,5 @@
 @import "../../../module.scss";
 
-$blue: #2f2c99;
-$white: white;
-
 .container {
   display: flex;
   flex-direction: column;
@@ -11,6 +8,12 @@ $white: white;
   justify-content: center;
   height: auto;
   align-items: center;
+
+  .question-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
   h1 {
     font-weight: 700;
@@ -22,33 +25,5 @@ $white: white;
 
   p {
     font-size: 22px;
-  }
-
-  .buttonContainer {
-    cursor: pointer;
-    margin-top: 20px;
-  }
-
-  button {
-    // orientation
-    all: unset;
-    display: flex;
-    align-items: center;
-    // size
-    width: 300px;
-    height: 35px;
-    font-size: 22px;
-    padding: 10px 20px 12px 20px;
-    // spacing
-    gap: 15px;
-    // decoration
-    color: $white;
-    background-color: $blue;
-    border-radius: 10px;
-
-    .arrow {
-      height: 25px;
-      width: 25px;
-    }
   }
 }

@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css";
-import "./Survey.css";
+import "./Survey.scss";
 
 interface SurveryProps {
   children: React.ReactNode[];
@@ -47,7 +47,8 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
       allowTouchMove={false}
       centeredSlides
       centeredSlidesBounds
-      modules={[Navigation]}
+      modules={[Navigation, Pagination]}
+      pagination
       navigation={{
         prevEl: prevRef.current,
         nextEl: nextRef.current,

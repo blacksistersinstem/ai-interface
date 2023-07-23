@@ -7,16 +7,25 @@ $white: white;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 
   h1 {
     font-weight: 700;
     font-size: 48px;
     margin: 0px;
+    margin-left: -2px;
     margin-bottom: 20px;
   }
 
   p {
     font-size: 22px;
+  }
+
+  .buttonContainer {
+    cursor: pointer;
   }
 
   button {
@@ -26,6 +35,7 @@ $white: white;
     align-items: center;
     // size
     width: 300px;
+    height: 35px;
     font-size: 22px;
     padding: 10px 20px 12px 20px;
     // spacing
@@ -34,7 +44,6 @@ $white: white;
     color: $white;
     background-color: $blue;
     border-radius: 10px;
-    cursor: pointer;
 
     .arrow {
       height: 25px;

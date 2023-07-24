@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PopupModal.css";
 
 interface PopupModalProps {
-  message: string
+  message: string;
 }
 
 export const PopupModal = ({ message }: PopupModalProps) => {
@@ -10,11 +10,13 @@ export const PopupModal = ({ message }: PopupModalProps) => {
 
   useEffect(() => {
     setTimeout(() => setShow(false), 1200);
-  }, {});
+  }, []);
 
-  const popup = <div className="popup-container">
-    <div>{message}</div>
-    </div>;
+  const popup = (
+    <div className="popup-container">
+      <div>{message}</div>
+    </div>
+  );
 
   return show && popup;
 };

@@ -10,10 +10,13 @@ button {
   all: unset;
   display: flex;
   align-items: center;
+  justify-content: center;
+  align-content: center;
   // size
+  width: 80%;
   font-size: 22px;
   padding: 10px 20px 12px 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   // spacing
   gap: 15px;
   // decoration

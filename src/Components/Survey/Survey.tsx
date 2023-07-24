@@ -30,7 +30,7 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
     const swiper = document.querySelector(".swiper")?.swiper;
     setSwiper(swiper);
   }, []);
-  console.log({ children });
+
   const slides = children.map((child, i) => {
     return (
       <SwiperSlide key={i}>
@@ -53,7 +53,7 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
         prevEl: prevRef.current,
         nextEl: nextRef.current,
       }}
-      spaceBetween={30}
+      spaceBetween={50}
       slidesPerView={'auto'}
     >
       {slides}

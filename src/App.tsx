@@ -1,8 +1,9 @@
 import React, { useState, useRef, MutableRefObject } from "react";
-import "./App.css";
+import "./App.scss";
 import { LoginBox } from "./Views/LoginBox/LoginBox";
 import { ResponseBox } from "./Views/ResponseBox/ResponseBox";
 import { GetStartedPrompt } from "./Views/GetStartedPrompt/GetStartedBox";
+import { DialogueBox } from "./Components/DialogueBox/DialogueBox";
 import { Survey } from './Components/Survey/Survey';
 const App = () => {
 
@@ -15,7 +16,9 @@ const App = () => {
       <LoginBox />
       <Survey>
         <GetStartedPrompt />
-        <div>bye</div>
+        <DialogueBox questionNumber={0}/>
+        <DialogueBox questionNumber={1}/>
+        <DialogueBox questionNumber={2}/>
       </Survey>
       {/* <ResponseBox /> */}
       <footer></footer>

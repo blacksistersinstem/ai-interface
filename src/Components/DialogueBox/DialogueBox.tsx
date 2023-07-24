@@ -1,18 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { Dispatch, useState, useRef, Ref, SetStateAction } from "react";
 import style from "./DialogueBox.module.scss";
 import { Button, ButtonSecondary, ButtonTertiary } from "../Button/Button";
 import { PopupModal } from "../../Views/PopupModal/PopupModal";
-
+import { useAPI } from "../../Hooks/useAPI";
+import { formProps } from "../../Interfaces/formProps";
 interface DialogueBoxProps {
   questionNumber: number;
   handleNext?: () => void;
   handlePrev?: () => void;
+  setForm: Dispatch<SetStateAction<formProps>>;
+  setSubmit: Dispatch<SetStateAction<boolean>>;
 }
 
 export const DialogueBox: React.FC<DialogueBoxProps> = ({
   questionNumber,
   handleNext,
   handlePrev,
+  setForm,
+  setSubmit,
 }) => {
   const [resume, setResume] = useState<Blob | null>(null);
   const [isWrongType, setIsWrongType] = useState(false);
@@ -31,10 +36,25 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
     }
     setIsWrongType(false);
     setResume(file);
+    setForm((prev) => {
+      return { ...prev, resume: file };
+    });
   };
 
   const createModal = (message: string) => {
     return <PopupModal message={message} />;
+  };
+
+  const handleSubmit = () => {
+    setSubmit(true);
+    handleNext!();
+  };
+
+  const handleSubmitRoles = () => {
+    setForm((prev) => {
+      return { ...prev, currentRole, targetRole };
+    });
+    handleNext!();
   };
 
   switch (questionNumber) {
@@ -53,13 +73,13 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
             placeholder="Target Role"
           ></input>
           {currentRole && targetRole && (
-            <Button onClick={handleNext} text={"Continue"} width="200px" />
+            <Button
+              onClick={handleSubmitRoles}
+              text={"Continue"}
+              width="200px"
+            />
           )}
-          <ButtonTertiary
-            onClick={handlePrev}
-            text={"Go Back"}
-            width="200px"
-          />
+          <ButtonTertiary onClick={handlePrev} text={"Go Back"} width="200px" />
         </section>
       );
     case 1:
@@ -83,22 +103,18 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
           <input
             type="file"
             id="file"
-            onChange={(e) => handleFile(e.target.files[0])}
             ref={uploadRef}
+            onChange={(e) => handleFile(e.target.files[0])}
             style={{ display: "none" }}
           />
           {resume && (
             <>
-              <Button onClick={handleNext} text={"Submit!"} width="200px" />
+              <Button onClick={handleSubmit} text={"Submit!"} width="200px" />
               {createModal("Resume Uploaded!")}
             </>
           )}
           {isWrongType && createModal("Wrong file type selected!")}
-          <ButtonTertiary
-            onClick={handlePrev}
-            text={"Go Back"}
-            width="200px"
-          />
+          <ButtonTertiary onClick={handlePrev} text={"Go Back"} width="200px" />
         </section>
       );
   }

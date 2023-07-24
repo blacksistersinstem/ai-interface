@@ -1,5 +1,5 @@
 /** useAPI.tsx
- * input: resume, currentRole, previousRole,
+ * input: resume, currentRole, targetRole,
  * output: isSuccess <null | boolean> representing login status
  *
  * hits /getResponse endpoint of API to create get response
@@ -12,24 +12,32 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { formProps } from "../Interfaces/formProps";
 
 const api_url = import.meta.env.VITE_AI_API_URL;
 
-export const useAPI = (
-  resume: Blob,
-  currentRole: string,
-  previousRole: string
-) => {
-  const [response, setResponse] = useState("");
+export const useAPI = () => {
+  const [response, setResponse] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const [prompt, setPrompt] = useState<formProps | null>(null);
 
   useEffect(() => {
-    if (!resume || !currentRole || !previousRole) return;
+    console.log("before", prompt);
+    if (
+      !prompt ||
+      !prompt.resume ||
+      !prompt.currentRole ||
+      !prompt.targetRole
+    ) {
+      return;
+    }
+    console.log("after", prompt);
+    const { resume, currentRole, targetRole } = prompt;
 
     axios
       .post(
         `${api_url}/getResponse`,
-        JSON.stringify({ resume, currentRole, previousRole }),
+        JSON.stringify({ resume, currentRole, targetRole }),
         {
           withCredentials: true,
           headers: {
@@ -51,7 +59,7 @@ export const useAPI = (
           setResponse("Failed to connect to server.");
         }
       });
-  }, []);
+  }, [prompt]);
 
-  return [isSuccess, response];
+  return [setPrompt, isSuccess, response];
 };

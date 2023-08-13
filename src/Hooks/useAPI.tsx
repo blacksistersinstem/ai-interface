@@ -16,13 +16,16 @@ import { formProps } from "../Interfaces/formProps";
 
 const api_url = import.meta.env.VITE_AI_API_URL;
 
-export const useAPI = () => {
+export const useAPI = (): [
+  React.Dispatch<formProps | null>,
+  boolean | null,
+  string | null
+] => {
   const [response, setResponse] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
   const [prompt, setPrompt] = useState<formProps | null>(null);
 
   useEffect(() => {
-    console.log("before", prompt);
     if (
       !prompt ||
       !prompt.resume ||
@@ -31,24 +34,23 @@ export const useAPI = () => {
     ) {
       return;
     }
-    console.log("after", prompt);
     const { resume, currentRole, targetRole } = prompt;
+    const formData = new FormData();
+    formData.append("file", resume);
+    formData.append("string", currentRole);
+    formData.append("string", targetRole);
 
     axios
-      .post(
-        `${api_url}/getResponse`,
-        JSON.stringify({ resume, currentRole, targetRole }),
-        {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .post(`${api_url}/getResponse`, formData, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((data) => {
         setIsSuccess(true);
-        setResponse(data.data.response);
+        setResponse(data.data);
       })
       .catch((error) => {
         if (error.request.status === 500) {

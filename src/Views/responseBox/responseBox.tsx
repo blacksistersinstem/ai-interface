@@ -7,13 +7,14 @@ interface ResponseBoxProps {
   targetRole: string;
 }
 
-export const ResponseBox = ({ currentRole, targetRole }: ResponseBoxProps) => {
-  const [isSuccess, response] = useAPI(new Blob(), currentRole, targetRole);
+export const ResponseBox = ({ resume, currentRole, targetRole }: ResponseBoxProps) => {
+  const [setPrompt, isSuccess, response] = useAPI();
 
+  
   useEffect(() => {
-    //
-  }, [response]);
-
+    setPrompt({resume, currentRole, targetRole});
+  }, []);
+  
   return (
     <>
       <div>Response: {response}</div>

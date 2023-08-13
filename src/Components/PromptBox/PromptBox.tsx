@@ -1,12 +1,13 @@
 import React, { useState, useRef, Ref, useEffect } from "react";
-import style from "./PromptBox.module.scss";
+import styles from "./PromptBox.module.scss";
 import { Button, ButtonSecondary, ButtonTertiary } from "../Button/Button";
 import { PopupModal } from "../../Views/PopupModal/PopupModal";
 import { useAPI } from "../../Hooks/useAPI";
 import { formProps } from "../../Interfaces/formProps";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface PromptBoxProps {
-  form: formProps;
+  form: formProps | null;
   promptNumber: number;
   submit: boolean;
 }
@@ -16,7 +17,7 @@ export const PromptBox: React.FC<PromptBoxProps> = ({
   promptNumber,
   submit,
 }) => {
-  const [setPrompt, status, response] = useAPI();
+  const [setPrompt, isSuccess, response] = useAPI();
 
   useEffect(() => {
     if (!submit) return;
@@ -32,13 +33,28 @@ export const PromptBox: React.FC<PromptBoxProps> = ({
   switch (promptNumber) {
     case 0:
       return (
-        <section className={style.container}>
-          {response ? response : null}
+        <section className={styles.container}>
+          {response ? (
+            <>
+              <pre className={styles.response}>{response}</pre>
+            </>
+          ) : (
+            <>
+              <h3>Generating Response...</h3>
+              <ClipLoader
+                color="#2f2c99"
+                loading={true}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+              />
+            </>
+          )}
         </section>
       );
     case 1:
       return (
-        <section className={style.container}>
+        <section className={styles.container}>
           <h1>{`Now let's take a look at your resume`}</h1>
         </section>
       );

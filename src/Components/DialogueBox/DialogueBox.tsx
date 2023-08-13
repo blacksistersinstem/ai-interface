@@ -1,4 +1,11 @@
-import React, { Dispatch, useState, useRef, Ref, SetStateAction } from "react";
+import React, {
+  Dispatch,
+  useState,
+  useRef,
+  Ref,
+  SetStateAction,
+  useEffect,
+} from "react";
 import style from "./DialogueBox.module.scss";
 import { Button, ButtonSecondary, ButtonTertiary } from "../Button/Button";
 import { PopupModal } from "../../Views/PopupModal/PopupModal";
@@ -8,8 +15,8 @@ interface DialogueBoxProps {
   questionNumber: number;
   handleNext?: () => void;
   handlePrev?: () => void;
-  setForm: Dispatch<SetStateAction<formProps>>;
-  setSubmit: Dispatch<SetStateAction<boolean>>;
+  setForm: Dispatch<SetStateAction<formProps | null>>;
+  setSubmit?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const DialogueBox: React.FC<DialogueBoxProps> = ({
@@ -23,35 +30,34 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
   const [isWrongType, setIsWrongType] = useState(false);
   const [currentRole, setCurrentRole] = useState<string | null>(null);
   const [targetRole, setTargetRole] = useState<string | null>(null);
-  const uploadRef = useRef<React.RefObject<HTMLElement | null>>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const uploadRef = useRef<HTMLElement | null>(null);
 
   const uploadHandler = () => {
     uploadRef.current?.click();
   };
 
   const handleFile = (file: Blob) => {
+    setShowPopup(true);
     if (!file || file.type !== "application/pdf") {
       setIsWrongType(true);
       return;
     }
     setIsWrongType(false);
     setResume(file);
-    setForm((prev) => {
+    setForm((prev: any) => {
       return { ...prev, resume: file };
     });
   };
 
-  const createModal = (message: string) => {
-    return <PopupModal message={message} />;
-  };
-
   const handleSubmit = () => {
     setSubmit(true);
+    setShowPopup(true);
     handleNext!();
   };
 
   const handleSubmitRoles = () => {
-    setForm((prev) => {
+    setForm((prev: any) => {
       return { ...prev, currentRole, targetRole };
     });
     handleNext!();
@@ -85,6 +91,11 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
     case 1:
       return (
         <section className={style.container}>
+          <PopupModal
+            message={"Resume Uploaded!"}
+            showPopup={showPopup}
+            setShowPopup={setShowPopup}
+          />
           <h1>{`Now let's take a look at your resume`}</h1>
           {resume ? (
             <ButtonSecondary
@@ -110,10 +121,8 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
           {resume && (
             <>
               <Button onClick={handleSubmit} text={"Submit!"} width="200px" />
-              {createModal("Resume Uploaded!")}
             </>
           )}
-          {isWrongType && createModal("Wrong file type selected!")}
           <ButtonTertiary onClick={handlePrev} text={"Go Back"} width="200px" />
         </section>
       );

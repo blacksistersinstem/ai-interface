@@ -14,12 +14,12 @@ interface SurveryProps {
 export const Survey: React.FC<SurveryProps> = ({ children }) => {
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [swiper, setSwiper] = useState(null);
+  const [swiper, setSwiper] = useState<any>(null);
 
   const handleNext = () => {
-    swiper.slideNext();
-    console.log(swiper);
+    swiper?.slideNext();
   };
 
   const handlePrev = () => {
@@ -33,7 +33,14 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
 
   const slides = children.map((child, i) => {
     return (
-      <SwiperSlide key={i}>
+      <SwiperSlide
+        key={i}
+        onFocus={(e) => {
+          if (e.target.innerText === "Submit!") {
+            setIsSubmitted(true);
+          }
+        }}
+      >
         {React.cloneElement(child as React.ReactElement, {
           handleNext,
           handlePrev,
@@ -48,13 +55,13 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
       centeredSlides
       centeredSlidesBounds
       modules={[Navigation, Pagination]}
-      pagination
+      pagination={!isSubmitted}
       navigation={{
         prevEl: prevRef.current,
         nextEl: nextRef.current,
       }}
       spaceBetween={50}
-      slidesPerView={'auto'}
+      slidesPerView={"auto"}
     >
       {slides}
     </SwiperComponent>

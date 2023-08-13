@@ -14,7 +14,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const api_url = import.meta.env.VITE_AI_API_URL;
+const api_url = import.meta.env.PROD
+  ? import.meta.env.VITE_AI_API_URL_PRODUCTION
+  : import.meta.env.VITE_AI_API_URL_DEVELOPMENT;
 
 interface Credentials {
   username: string;

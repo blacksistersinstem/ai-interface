@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styles from "./GetStartedBox.module.scss";
+import React from "react";
+import styles from "./GetStartedPrompt.module.scss";
 import { Button } from "../../Components/Button/Button";
 
 interface GetStartedPromptProps {

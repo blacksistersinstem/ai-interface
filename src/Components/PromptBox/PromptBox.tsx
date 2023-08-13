@@ -1,7 +1,5 @@
-import React, { useState, useRef, Ref, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./PromptBox.module.scss";
-import { Button, ButtonSecondary, ButtonTertiary } from "../Button/Button";
-import { PopupModal } from "../../Views/PopupModal/PopupModal";
 import { useAPI } from "../../Hooks/useAPI";
 import { formProps } from "../../Interfaces/formProps";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -26,15 +24,15 @@ export const PromptBox: React.FC<PromptBoxProps> = ({
 
   if (!form || !form.resume || !form.currentRole || !form.targetRole) return;
 
-  const createModal = (message: string) => {
-    return <PopupModal message={message} />;
-  };
+  // const createModal = (message: string) => {
+  //   return <PopupModal message={message} />;
+  // };
 
   switch (promptNumber) {
     case 0:
       return (
         <section className={styles.container}>
-          {response ? (
+          {isSuccess ? (
             <>
               <pre className={styles.response}>{response}</pre>
             </>

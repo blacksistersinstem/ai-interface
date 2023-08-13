@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect, ReactPropTypes } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
@@ -27,7 +27,8 @@ export const Survey: React.FC<SurveryProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const swiper = document.querySelector(".swiper")?.swiper;
+    const swiper = (document.querySelector(".swiper") as any | null)
+      ?.swiper as typeof SwiperComponent;
     setSwiper(swiper);
   }, []);
 

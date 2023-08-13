@@ -1,15 +1,7 @@
-import React, {
-  Dispatch,
-  useState,
-  useRef,
-  Ref,
-  SetStateAction,
-  useEffect,
-} from "react";
+import React, { Dispatch, useState, useRef, SetStateAction } from "react";
 import style from "./DialogueBox.module.scss";
 import { Button, ButtonSecondary, ButtonTertiary } from "../Button/Button";
 import { PopupModal } from "../../Views/PopupModal/PopupModal";
-import { useAPI } from "../../Hooks/useAPI";
 import { formProps } from "../../Interfaces/formProps";
 interface DialogueBoxProps {
   questionNumber: number;
@@ -27,23 +19,24 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
   setSubmit,
 }) => {
   const [resume, setResume] = useState<Blob | null>(null);
-  const [isWrongType, setIsWrongType] = useState(false);
+  //const [isWrongType, setIsWrongType] = useState(false);
   const [currentRole, setCurrentRole] = useState<string | null>(null);
   const [targetRole, setTargetRole] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
-  const uploadRef = useRef<HTMLElement | null>(null);
+  const uploadRef = useRef<HTMLInputElement | null>(null);
 
   const uploadHandler = () => {
     uploadRef.current?.click();
   };
 
-  const handleFile = (file: Blob) => {
+  const handleFile = (file: Blob | null) => {
+    if (!file) return;
     setShowPopup(true);
-    if (!file || file.type !== "application/pdf") {
-      setIsWrongType(true);
-      return;
-    }
-    setIsWrongType(false);
+    // if (!file || file.type !== "application/pdf") {
+    //   setIsWrongType(true);
+    //   return;
+    // }
+    // setIsWrongType(false);
     setResume(file);
     setForm((prev: any) => {
       return { ...prev, resume: file };
@@ -51,9 +44,13 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
   };
 
   const handleSubmit = () => {
-    setSubmit(true);
+    if (setSubmit) {
+      setSubmit(true);
+    }
     setShowPopup(true);
-    handleNext!();
+    if (handleNext) {
+      handleNext();
+    }
   };
 
   const handleSubmitRoles = () => {
@@ -115,7 +112,9 @@ export const DialogueBox: React.FC<DialogueBoxProps> = ({
             type="file"
             id="file"
             ref={uploadRef}
-            onChange={(e) => handleFile(e.target.files[0])}
+            onChange={(e) =>
+              handleFile(e.target.files ? e.target.files[0] : null)
+            }
             style={{ display: "none" }}
           />
           {resume && (

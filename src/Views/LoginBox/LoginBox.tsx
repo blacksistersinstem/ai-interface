@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLogin } from "../../Hooks/useLogin";
 import "./LoginBox.css";
 import { PopupModal } from "../PopupModal/PopupModal";
-import { unmountComponentAtNode } from "react-dom";
 
 interface LoginBoxProps {
   setAuthorized: React.Dispatch<boolean>;

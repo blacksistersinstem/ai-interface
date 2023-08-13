@@ -39,6 +39,6 @@
   cursor: pointer;
 }
 
-.login-container > button:hover{
+.login-container > button:hover {
   background-color: darkcyan;
 }

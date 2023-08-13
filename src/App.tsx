@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.scss";
 import { LoginBox } from "./Views/LoginBox/LoginBox";
-import { GetStartedPrompt } from "./Views/GetStartedPrompt/GetStartedBox";
+import { GetStartedPrompt } from "./Views/GetStartedPrompt/GetStartedPrompt";
 import { DialogueBox } from "./Components/DialogueBox/DialogueBox";
 import { Survey } from "./Components/Survey/Survey";
 import { formProps } from "./Interfaces/formProps";

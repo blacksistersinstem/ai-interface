@@ -44,7 +44,7 @@ export const useLogin = (): [
           "Content-Type": "application/json",
         },
       })
-      .then((data) => {
+      .then(() => {
         setIsSuccess(true);
       })
       .catch((error) => {

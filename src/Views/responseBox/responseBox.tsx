@@ -1,8 +1,9 @@
 // displays response from ai readable stream as text
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAPI } from "../../Hooks/useAPI";
 
 interface ResponseBoxProps {
+  resume: Blob;
   currentRole: string;
   targetRole: string;
 }

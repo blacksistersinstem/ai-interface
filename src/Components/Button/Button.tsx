@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Button.module.scss";
 //@ts-ignore
 import { ReactComponent as Arrow } from "../../assets/svg/arrow.svg";

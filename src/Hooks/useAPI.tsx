@@ -1,5 +1,5 @@
 /** useAPI.tsx
- * input: resume, currentRole, previousRole,
+ * input: resume, currentRole, targetRole,
  * output: isSuccess <null | boolean> representing login status
  *
  * hits /getResponse endpoint of API to create get response
@@ -12,35 +12,45 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { formProps } from "../Interfaces/formProps";
 
 const api_url = import.meta.env.VITE_AI_API_URL;
 
-export const useAPI = (
-  resume: Blob,
-  currentRole: string,
-  previousRole: string
-) => {
-  const [response, setResponse] = useState("");
+export const useAPI = (): [
+  React.Dispatch<formProps | null>,
+  boolean | null,
+  string | null
+] => {
+  const [response, setResponse] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const [prompt, setPrompt] = useState<formProps | null>(null);
 
   useEffect(() => {
-    if (!resume || !currentRole || !previousRole) return;
+    if (
+      !prompt ||
+      !prompt.resume ||
+      !prompt.currentRole ||
+      !prompt.targetRole
+    ) {
+      return;
+    }
+    const { resume, currentRole, targetRole } = prompt;
+    const formData = new FormData();
+    formData.append("file", resume);
+    formData.append("string", currentRole);
+    formData.append("string", targetRole);
 
     axios
-      .post(
-        `${api_url}/getResponse`,
-        JSON.stringify({ resume, currentRole, previousRole }),
-        {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .post(`${api_url}/getResponse`, formData, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((data) => {
         setIsSuccess(true);
-        setResponse(data.data.response);
+        setResponse(data.data);
       })
       .catch((error) => {
         if (error.request.status === 500) {
@@ -51,7 +61,7 @@ export const useAPI = (
           setResponse("Failed to connect to server.");
         }
       });
-  }, []);
+  }, [prompt]);
 
-  return [isSuccess, response];
+  return [setPrompt, isSuccess, response];
 };

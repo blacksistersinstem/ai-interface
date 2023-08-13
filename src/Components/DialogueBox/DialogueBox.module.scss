@@ -1,0 +1,25 @@
+@import "../../../module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: auto;
+  margin-left: -5px;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  font-size: 28px;
+  text-align: center;
+
+  input {
+    all: unset;
+    font-size: 22px;
+    padding: 15px;
+    height: 30px;
+    width: 300px;
+    border-radius: 10px;
+    border: 2px solid lightgray;
+  }
+}

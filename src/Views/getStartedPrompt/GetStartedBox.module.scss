@@ -1,0 +1,30 @@
+@import "../../../module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  justify-content: center;
+  height: auto;
+  align-items: center;
+  justify-self: center;
+  width: 100%;
+
+  .question-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 48px;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 22px;
+  }
+}

@@ -15,6 +15,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ServerError } from "../Interfaces/ServerError";
 
+// cors stuff
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.withCredentials = true;
+
 const api_url = import.meta.env.PROD
   ? import.meta.env.VITE_AI_API_URL_PRODUCTION
   : import.meta.env.VITE_AI_API_URL_DEVELOPMENT;

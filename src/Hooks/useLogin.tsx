@@ -59,7 +59,6 @@ export const useLogin = (): [
       })
       .catch((error: ServerError) => {
         if (error.request.status === 500) {
-          console.log(error)
           setIsSuccess(false);
           setMessage("Username and/or password incorrect. Please try again.");
         } else {

@@ -20,6 +20,10 @@ import { ServerError } from "../Interfaces/ServerError";
 // axios.defaults.xsrfHeaderName = "X-CSRFToken";
 // axios.defaults.withCredentials = true;
 
+// dev override for live server testing
+// import.meta.env.VITE_AI_API_URL_DEVELOPMENT =
+//   "https://career-coach-api.adaptable.app";
+
 const api_url = import.meta.env.PROD
   ? import.meta.env.VITE_AI_API_URL_PRODUCTION
   : import.meta.env.VITE_AI_API_URL_DEVELOPMENT;
@@ -55,6 +59,7 @@ export const useLogin = (): [
       })
       .catch((error: ServerError) => {
         if (error.request.status === 500) {
+          console.log(error)
           setIsSuccess(false);
           setMessage("Username and/or password incorrect. Please try again.");
         } else {

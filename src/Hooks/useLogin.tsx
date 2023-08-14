@@ -13,6 +13,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { ServerError } from "../Interfaces/ServerError";
 
 const api_url = import.meta.env.PROD
   ? import.meta.env.VITE_AI_API_URL_PRODUCTION
@@ -47,7 +48,7 @@ export const useLogin = (): [
       .then(() => {
         setIsSuccess(true);
       })
-      .catch((error) => {
+      .catch((error: ServerError) => {
         if (error.request.status === 500) {
           setIsSuccess(false);
           setMessage("Username and/or password incorrect. Please try again.");
